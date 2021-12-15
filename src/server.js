@@ -13,10 +13,16 @@ const DATABASE_URI = process.env.MONGO_URI;
 server.use(cors());
 server.use(express.json());
 
-mongoose.connect(DATABASE_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+mongoose.connect(
+  DATABASE_URI,
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  },
+  () => {
+    console.log("Connected to database");
+  }
+);
 mongoose.connection.on("connected", () => {
   server.listen(PORT, () => {
     console.log(`server is running on port: ${PORT}`);
