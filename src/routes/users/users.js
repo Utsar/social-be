@@ -1,9 +1,8 @@
 import express from "express";
+import user from "../users/schema.js";
 
 const usersRouter = express.Router();
 
-usersRouter.get("/", (req, res) => {
-  res.send("Hello World");
-});
+usersRouter.put("/:id", async (req, res) => {});
 
 export default usersRouter;
