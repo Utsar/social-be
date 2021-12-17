@@ -4,10 +4,10 @@ import User from "../users/schema.js";
 const authRouter = express.Router();
 
 // Register
-authRouter.post("/auth/register", async (req, res) => {
+authRouter.post("/register", async (req, res) => {
   const user = await new User({
-    username: "kristian",
-    email: "utsar@gmail.com",
+    username: "kristianSocial",
+    email: "social-app@gmail.com",
     password: "123456",
   });
   await user.save();

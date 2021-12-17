@@ -1,6 +1,6 @@
 import express from "express";
 import mongoose from "mongoose";
-import cors from "cors";
+// import cors from "cors";
 import dotenv from "dotenv";
 import helmet from "helmet";
 import morgan from "morgan";
@@ -18,7 +18,7 @@ const DATABASE_URI = process.env.MONGO_URI;
 
 // **********Middlewares**********
 
-server.use(cors());
+// server.use(cors());
 server.use(express.json());
 server.use(helmet());
 server.use(morgan("common"));

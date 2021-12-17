@@ -23,13 +23,11 @@ const UserSchema = new Mongoose.Schema(
     },
     profilePicture: {
       type: String,
-      default:
-        "https://res.cloudinary.com/dzqbzqgqw/image/upload/v1598424851/default_profile_picture_qxqzqr.png",
+      default: "",
     },
     coverPicture: {
       type: String,
-      default:
-        "https://res.cloudinary.com/dzqbzqgqw/image/upload/v1598424851/default_cover_picture_qxqzqr.png",
+      default: "",
     },
     followers: {
       type: Array,
