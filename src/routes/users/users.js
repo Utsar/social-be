@@ -74,7 +74,7 @@ usersRouter.put("/:id/follow", async (req, res) => {
       res.status(500).json(error);
     }
   } else {
-    res.status.apply(403).json("you cant follow yourself");
+    res.status(403).json("you cant follow yourself");
   }
 });
 
