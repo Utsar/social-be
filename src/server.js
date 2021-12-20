@@ -8,6 +8,7 @@ import morgan from "morgan";
 import usersRouter from "./routes/users/users.js";
 import listEndpoints from "express-list-endpoints";
 import authRouter from "./routes/auth/auth.js";
+import postRouter from "./routes/post/post.js";
 
 dotenv.config();
 
@@ -26,6 +27,7 @@ server.use(morgan("common"));
 // **********Routes**********
 server.use("/users", usersRouter);
 server.use("/auth", authRouter);
+server.use("/post", postRouter);
 
 // server.get("/", (req, res) => {
 //   res.send("Hello World");
