@@ -1,5 +1,5 @@
-import express, { Router } from "express";
-import usersRouter from "../users/users.js";
+import express from "express";
+import User from "../users/schema.js";
 import Post from "./schema.js";
 
 const postRouter = express.Router();
@@ -72,13 +72,13 @@ postRouter.get("/:id", async (req, res) => {
 });
 // get posts of following users
 
-postRouter.get("/timeline", async (req, res) => {
+postRouter.get("/timeline/all", async (req, res) => {
   try {
     const currentUser = await User.findById(req.body.userId);
     const userPosts = await Post.find({ userId: currentUser._id });
     const friendPosts = await Promise.all(
       currentUser.following.map((friendId) => {
-        Post.find({ userId: friendId });
+        return Post.find({ userId: friendId });
       })
     );
     res.json(userPosts.concat(...friendPosts));
