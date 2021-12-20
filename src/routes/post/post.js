@@ -1,4 +1,5 @@
 import express, { Router } from "express";
+import usersRouter from "../users/users.js";
 import Post from "./schema.js";
 
 const postRouter = express.Router();
@@ -60,6 +61,30 @@ postRouter.put("/:id/like", async (req, res) => {
   }
 });
 // get a post
+
+postRouter.get("/:id", async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.id);
+    res.status(200).send(post);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
 // get posts of following users
+
+postRouter.get("/timeline", async (req, res) => {
+  try {
+    const currentUser = await User.findById(req.body.userId);
+    const userPosts = await Post.find({ userId: currentUser._id });
+    const friendPosts = await Promise.all(
+      currentUser.following.map((friendId) => {
+        Post.find({ userId: friendId });
+      })
+    );
+    res.json(userPosts.concat(...friendPosts));
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
 
 export default postRouter;
