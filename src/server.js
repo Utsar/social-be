@@ -25,9 +25,9 @@ server.use(helmet());
 server.use(morgan("common"));
 
 // **********Routes**********
-server.use("/users", usersRouter);
-server.use("/auth", authRouter);
-server.use("/post", postRouter);
+server.use("/api/users", usersRouter);
+server.use("/api/auth", authRouter);
+server.use("/api/posts", postRouter);
 
 // server.get("/", (req, res) => {
 //   res.send("Hello World");
