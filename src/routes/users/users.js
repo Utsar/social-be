@@ -5,9 +5,13 @@ const usersRouter = express.Router();
 
 // Get user
 
-usersRouter.get("/:id", async (req, res) => {
+usersRouter.get("/", async (req, res) => {
+  const userId = req.query.userId;
+  const username = req.query.username;
   try {
-    const user = await User.findById(req.params.id);
+    const user = userId
+      ? await User.findById(userId)
+      : await User.findOne({ username: username });
     // !user && res.status(404).json("User not found");
     const { password, updatedAt, isAdmin, ...other } = user._doc;
     res.status(200).json(other);
