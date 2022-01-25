@@ -9,6 +9,9 @@ import usersRouter from "./routes/users/users.js";
 import listEndpoints from "express-list-endpoints";
 import authRouter from "./routes/auth/auth.js";
 import postRouter from "./routes/post/post.js";
+import multer from "multer";
+import path from "path";
+import { fileURLToPath } from "url";
 
 dotenv.config();
 
@@ -24,16 +27,36 @@ server.use(express.json());
 server.use(helmet());
 server.use(morgan("common"));
 
+// ********* multer *********
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "public/uploads");
+  },
+  filename: (req, file, cb) => {
+    cb(null, file.originalname);
+  },
+});
+
+const upload = multer({ storage: storage });
+server.post("/api/upload", upload.single("file"), (req, res) => {
+  try {
+    return res.status(200).send("File uploaded successfully");
+  } catch (error) {
+    console.log(error);
+  }
+});
 // **********Routes**********
 server.use("/api/users", usersRouter);
 server.use("/api/auth", authRouter);
 server.use("/api/posts", postRouter);
 
-// server.get("/", (req, res) => {
-//   res.send("Hello World");
-// });
-
 console.table(listEndpoints(server));
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+server.use("/uploads", express.static(path.join(__dirname, "public/uploads")));
+console.log(__dirname);
+console.log(__filename);
 
 // **********Connect to MongoDB**********
 
