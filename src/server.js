@@ -33,7 +33,7 @@ const storage = multer.diskStorage({
     cb(null, "public/uploads");
   },
   filename: (req, file, cb) => {
-    cb(null, file.originalname);
+    cb(null, req.body.name);
   },
 });
 
@@ -52,6 +52,7 @@ server.use("/api/posts", postRouter);
 
 console.table(listEndpoints(server));
 
+// **********path and url**********
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 server.use("/uploads", express.static(path.join(__dirname, "public/uploads")));
