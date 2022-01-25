@@ -20,17 +20,10 @@ const server = express();
 const PORT = process.env.PORT || 3002;
 const DATABASE_URI = process.env.MONGO_URI;
 
-// **********Middlewares**********
-
-// server.use(cors());
-server.use(express.json());
-server.use(helmet());
-server.use(morgan("common"));
-
 // ********* multer *********
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "public/uploads");
+    cb(null, "src/public/uploads");
   },
   filename: (req, file, cb) => {
     cb(null, req.body.name);
@@ -45,19 +38,29 @@ server.post("/api/upload", upload.single("file"), (req, res) => {
     console.log(error);
   }
 });
+// **********path and url**********
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+server.use(
+  "/uploads",
+  express.static(path.join(__dirname, "src/public/uploads"))
+);
+console.log(__dirname);
+console.log(__filename);
+
+// **********Middlewares**********
+
+// server.use(cors());
+server.use(express.json());
+server.use(helmet());
+server.use(morgan("common"));
+
 // **********Routes**********
 server.use("/api/users", usersRouter);
 server.use("/api/auth", authRouter);
 server.use("/api/posts", postRouter);
 
 console.table(listEndpoints(server));
-
-// **********path and url**********
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-server.use("/uploads", express.static(path.join(__dirname, "public/uploads")));
-console.log(__dirname);
-console.log(__filename);
 
 // **********Connect to MongoDB**********
 
