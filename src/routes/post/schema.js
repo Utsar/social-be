@@ -17,8 +17,12 @@ const PostSchema = new Mongoose.Schema(
       type: Array,
       default: [],
     },
+    comments: {
+      type: Array,
+      default: [],
+    },
   },
-  { timeStamps: true }
+  { timestamps: true }
 );
 
 export default Mongoose.model("Post", PostSchema);

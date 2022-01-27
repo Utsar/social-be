@@ -41,10 +41,7 @@ server.post("/api/upload", upload.single("file"), (req, res) => {
 // **********path and url**********
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-server.use(
-  "/uploads",
-  express.static(path.join(__dirname, "src/public/uploads"))
-);
+server.use("/uploads", express.static(path.join(__dirname, "public/uploads")));
 console.log(__dirname);
 console.log(__filename);
 
