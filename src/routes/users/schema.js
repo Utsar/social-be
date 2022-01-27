@@ -41,7 +41,7 @@ const UserSchema = new Mongoose.Schema(
       type: Boolean,
       default: false,
     },
-    desc: {
+    description: {
       type: String,
       max: 100,
     },
@@ -60,5 +60,15 @@ const UserSchema = new Mongoose.Schema(
   },
   { timeStamps: true }
 );
+
+UserSchema.methods.toJSON = function () {
+  const user = this;
+  const userObject = user.toObject();
+
+  delete userObject.password;
+  delete userObject.__v;
+
+  return userObject;
+};
 
 export default Mongoose.model("User", UserSchema);
