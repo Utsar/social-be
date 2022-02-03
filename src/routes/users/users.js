@@ -92,8 +92,8 @@ usersRouter.put("/:id/follow", async (req, res) => {
       } else {
         res.status(403).json("Already following this user");
       }
-      await user.save();
-      res.status(200).json("User followed");
+      // await user.save();
+      // res.status(200).json("User followed");
     } catch (error) {
       res.status(500).json(error);
     }
@@ -116,8 +116,8 @@ usersRouter.put("/:id/unfollow", async (req, res) => {
       } else {
         res.status(403).json("Already unfollowing this user");
       }
-      await user.save();
-      res.status(200).json("User unfollowed");
+      // await user.save();
+      // res.status(200).json("User unfollowed");
     } catch (error) {
       res.status(500).json(error);
     }
