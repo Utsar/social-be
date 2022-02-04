@@ -2,7 +2,7 @@ import Mongoose from "mongoose";
 
 const MessageSchema = new Mongoose.Schema(
   {
-    converationsId: {
+    conversationId: {
       type: String,
     },
 

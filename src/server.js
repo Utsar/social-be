@@ -59,7 +59,7 @@ server.use("/api/users", usersRouter);
 server.use("/api/auth", authRouter);
 server.use("/api/posts", postRouter);
 server.use("/api/conversations", conversationRouter);
-server.use("/api/mesages", messageRouter);
+server.use("/api/messages", messageRouter);
 
 console.table(listEndpoints(server));
 
