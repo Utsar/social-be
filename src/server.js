@@ -12,6 +12,8 @@ import postRouter from "./routes/post/post.js";
 import multer from "multer";
 import path from "path";
 import { fileURLToPath } from "url";
+import conversationRouter from "./routes/conversations/Conversations.js";
+import messageRouter from "./routes/messages/Messages.js";
 
 dotenv.config();
 
@@ -56,6 +58,8 @@ server.use(morgan("common"));
 server.use("/api/users", usersRouter);
 server.use("/api/auth", authRouter);
 server.use("/api/posts", postRouter);
+server.use("/api/conversations", conversationRouter);
+server.use("/api/mesages", messageRouter);
 
 console.table(listEndpoints(server));
 
